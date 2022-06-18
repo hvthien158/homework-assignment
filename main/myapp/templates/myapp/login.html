@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+</head>
+<body id="page1">
+    <div class="wrap">
+      <div class="header-form">
+          <form class="login-form" action="" method="post">
+            {% csrf_token %}
+            <h2 style="text-align:center;">Login</h2>
+            <input name="username" style="width: 390px; height: 30px;" type="text" class="form-control" placeholder="username">
+            <input name="password" style="width: 390px; height: 30px;" type="password" class="form-control" placeholder="Password">
+            <button type="submit" class="button-submit">Sign in</button>
+            {% if check == False %}
+              <p style="color: red; font-size: 14px">Invalid username or wrong password</p>
+          {% endif %}
+          </form>
+      </div>
+    </div>
+    <script type="text/javascript"> Cufon.now(); </script>
+  </body>
+</html>

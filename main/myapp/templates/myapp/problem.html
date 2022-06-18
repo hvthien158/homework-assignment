@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning web</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/student.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-6.1.1/css/all.min.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/jquery-1.4.2.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/cufon-yui.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/cufon-replace.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/Myriad_Pro_300.font.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/Myriad_Pro_400.font.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/script.js' %}" ></script>
+</head>
+
+
+<body id="page1">
+<!-- START PAGE SOURCE -->
+<div class="wrap">
+  <header>
+    <div class="container1">
+      <nav>
+        <ul>
+          <li class="current"><a href="#" class="m1">Problem</a></li>
+          <li><a href="{% url 'history' %}" class="m2">History</a></li>
+          <li class="logout"><a href="{% url 'logout_user'%}" class="m4">Logout</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+  <div class="container1">
+    <aside style="margin-top: 32px;">
+      <h3>PROBLEMS</h3>
+      <ul class="categories">
+
+          {% if list %}
+            {% for item in list %}
+              <li>
+                  <span>
+                    <a href="{% url 'detail' item.id %}">{{ item.name }}</a>
+                  </span>
+                </li>
+            {% endfor %}
+            {% else %}
+                <p style="color: red">Today no problem!</p>
+            {% endif %}
+      </ul>
+
+      </ul>
+    </aside>
+    <section id="content" style="margin-top: 32px;">
+        {% if new %}
+          <h3 style="margin-bottom: 32px">DEADLINE:</h3>
+          <ul class="categories">
+            {% for item in new %}
+              <li style="font-size: 26px; margin-bottom: 12px">
+                  <span>
+                    <a href="{% url 'detail' item.id %}">{{ item.name }}</a>
+                  </span> <br>
+                  <p>Deadline: {{item.deadline}}</p>
+                </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+            <div id="banner">
+                <img style="width: 200px;" src="{% static 'images/relax.png' %}" alt="">
+                <p style="margin-top: 32px; font-size: 28px;">Today no problem</p>
+              </div>
+        {% endif %}
+    </section>
+  </div>
+</div>
+
+<script type="text/javascript"> Cufon.now(); </script>
+<!-- END PAGE SOURCE -->
+</body>
+</html>

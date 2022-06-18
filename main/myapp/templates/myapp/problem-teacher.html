@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lecturer</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/student.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'fontawesome-free-6.1.1/css/all.min.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/jquery-1.4.2.min.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/cufon-yui.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/cufon-replace.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/Myriad_Pro_300.font.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/Myriad_Pro_400.font.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/script.js' %}" ></script>
+</head>
+
+
+<body id="page1">
+<!-- START PAGE SOURCE -->
+<div class="wrap">
+  <header>
+    <div class="container1">
+      <nav>
+        <ul>
+          <li style="margin-left: 22px;" class="current"><a href="" class="m1">Problem</a></li>
+          <li><a href="{% url 'add_problem'%}" class="m2">New deadline</a></li>
+          <li class="logout"><a href="{% url 'logout_user'%}" class="m4">Logout</a></li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+  <div class="container1">
+    <aside style="margin-top: 32px;">
+      <h3>PROBLEMS</h3>
+      <ul class="categories">
+
+          {% if list %}
+            {% for item in list %}
+              <li>
+                  <span>
+                    <a class="list-option-teacher" href="{% url 'detail' item.id %}">{{ item.name }}</a>
+                      <a id="button_delete" class="{{ item.id }}"><i class="fa-solid fa-trash-can"></i></a>
+                      <a id="button_update" href="{% url 'update' item.id %}"><i class="fa-solid fa-pen"></i></a>
+                  </span>
+                </li>
+            {% endfor %}
+            {% else %}
+                <p style="color: red">Today no problem!</p>
+            {% endif %}
+      </ul>
+    </aside>
+    <section id="content">
+      <div id="banner">
+        <img style="width: 150px;" src="{% static 'images/writing.png' %}" alt="">
+        <p style="margin-top: 32px; font-size: 20px;">No problem is chosen to edit</p>
+      </div>
+
+    </section>
+  </div>
+</div>
+
+<script type="text/javascript"> Cufon.now(); </script>
+<script>
+        var btn_delete = document.getElementById("button_delete");
+        btn_delete.onclick = function (event){
+            xacnhan = confirm("Bạn có chắc chắn muốn xóa problem này không?");
+            if(xacnhan){
+                let problem_id = btn_delete.getAttribute("class");
+                location.replace("/delete/" + problem_id);
+            }
+        }
+    </script>
+<!-- END PAGE SOURCE -->
+</body>
+</html>
